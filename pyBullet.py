@@ -28,16 +28,22 @@ class pyBullet:
 def main():
     parser = argparse.ArgumentParser(description="Do something, then send a notification.")
     parser.add_argument('arguments', nargs='*', help="Things to do.")
-    parser.add_argument('-m', '--message', dest='multiple', help="Message to send.")
-    parser.add_argument('-t', '--title', dest='title', help="Title of the message.")
-    args = " ".join(parser.parse_args().arguments)
-    cmds = filter(bool, args.split(','))
+    parser.add_argument('-m', '--message', dest='message', help="Message to send.", default=None)
+    parser.add_argument('-t', '--title', dest='title', help="Title of the message.", default=None)
+    args = parser.parse_args()
+    cmd_args = " ".join(args.arguments)
+    cmds = filter(bool, cmd_args.split(','))
     cmds = "&".join(cmds)
-    print(cmds)
-    input("wait")
     out = subprocess.call(cmds, shell=True)
     pb = pyBullet()
-    pb.push("Done!", "I did some things.")
+
+    message = "pyBullet task complete."
+    title = "pyBullet"
+    if args.message:
+        message = args.message
+    if args.title:
+        title = args.title
+    response = pb.push(title, message)
 
 if __name__ == "__main__":
     main()
