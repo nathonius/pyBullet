@@ -30,11 +30,12 @@ def main():
     parser.add_argument('arguments', nargs='*', help="Things to do.")
     parser.add_argument('-m', '--message', dest='multiple', help="Message to send.")
     parser.add_argument('-t', '--title', dest='title', help="Title of the message.")
-    args = "".join(parser.parse_args().arguments)
-    args = args.replace(" ", "")
+    args = " ".join(parser.parse_args().arguments)
     cmds = filter(bool, args.split(','))
-    for cmd in cmds:
-        out = subprocess.call(cmd, shell=True)
+    cmds = "&".join(cmds)
+    print(cmds)
+    input("wait")
+    out = subprocess.call(cmds, shell=True)
     pb = pyBullet()
     pb.push("Done!", "I did some things.")
 
