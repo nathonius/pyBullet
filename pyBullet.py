@@ -4,6 +4,7 @@ import json
 import os.path as path
 import argparse
 import subprocess
+import platform
 
 
 class pyBullet:
@@ -33,10 +34,12 @@ def main():
     args = parser.parse_args()
     cmd_args = " ".join(args.arguments)
     cmds = filter(bool, cmd_args.split(','))
-    cmds = "&".join(cmds)
+    if platform.system() is "Windows":
+        cmds = "&".join(cmds)
+    else:
+        cmds = ";".join(cmds)
     out = subprocess.call(cmds, shell=True)
     pb = pyBullet()
-
     message = "pyBullet task complete."
     title = "pyBullet"
     if args.message:
