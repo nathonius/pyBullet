@@ -96,8 +96,6 @@ def main():
         with open(inpath, 'r') as fp:
             saved_args = json.load(fp)
         args = make_fakespace(saved_args, args)
-        print args.data
-        raw_input("wait")
 
     elif args.save:
         out = json.dumps(vars(args))
