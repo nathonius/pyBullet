@@ -25,7 +25,7 @@ There are also quite a few other flags and features, most notably the save and r
 | --save | Save this set of arguments with this name. Can later be recalled. | `--save task_name` |
 | --recall | Recall a saved set of arguments with this name. Any args specified here will override the saved args. | `--recall task_name` |
 | -b | If a task has a return code other than 0, do not execute the rest of the commands. Displays the failing command. | `Task 3 failed.` |
-| -e | Send a notification for each task, appending the task number to the title. | N/A |
+| -e | Send a notification for each task, appending the task number to the title. | `Task Name : Task 1` |
 | -r | Add the return code to the message. | `Task Complete : Returned 0` |
 | -s | Run the given commands in a shell. Allows the use of environment setup scripts, but could be dangerous. See [here](https://docs.python.org/2/library/subprocess.html#frequently-used-arguments). Makes the -e and -b flags have no effect. | N/A |
 | -f | Turn on strict mode. If any command fails because it cannot be executed (not because of its return code), the exception will be raised instead of displaying a warning. | N/A |
