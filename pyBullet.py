@@ -5,7 +5,6 @@ import os.path as path
 import argparse
 import subprocess
 import platform
-from collections import namedtuple
 
 
 class pyBullet:
