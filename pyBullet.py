@@ -54,11 +54,11 @@ def make_fakespace(data, args):
     default_title = "pyBullet"
     new_args = fakespace(data)
     for arg in args.keys():
-        if arg is "message" and args["message"] is not default_message:
+        if arg is "message" and args["message"] != default_message:
             new_args.data[arg] = args[arg]
-        elif arg is "title" and args["title"] is not default_title:
+        elif arg is "title" and args["title"] != default_title:
             new_args.data[arg] = args[arg]
-        elif args[arg] and arg is not "message" and arg is not "title":
+        elif args[arg] and arg != "message" and arg != "title":
             new_args.data[arg] = args[arg]
     return new_args
 
