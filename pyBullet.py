@@ -1,11 +1,11 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import requests
 import json
 import os.path as path
 import argparse
 import subprocess
 import platform
-
 
 class pyBullet:
     def __init__(self, api_key=None):
@@ -14,11 +14,7 @@ class pyBullet:
             self.url = "https://api.pushbullet.com/v2/pushes"
             config_path = path.join(path.dirname(path.abspath(__file__)), "api.pub")
             if not path.isfile(config_path):
-                # --Python 2 Compatibility-- #
-                try:
-                    raise FileNotFoundError("No api key specified and api.pub not found.")
-                except:
-                    raise IOError("No api key specified and api.pub not found.")
+                raise IOError("No api key specified and api.pub not found.")
             with open(config_path, 'r') as fp:
                 self.api_key = fp.read().strip()
         else:
@@ -86,11 +82,7 @@ def main():
     if args.recall:
         inpath = path.join(path.dirname(path.abspath(__file__)), str(args.recall)+".saved_args")
         if not path.isfile(inpath):
-            # --Python 2 Compatibility-- #
-            try:
-                print("Could not locate saved command set \""+str(args.recall)+"\".")
-            except:
-                print "Could not locate saved command set \""+str(args.recall)+"\"."
+            print("Could not locate saved command set \""+str(args.recall)+"\".")
             return 1
         with open(inpath, 'r') as fp:
             saved_args = json.load(fp)
@@ -125,11 +117,7 @@ def main():
         try:
             ret = subprocess.call(cmd.strip(), shell=args.shell)
         except:
-            # --Python 2 Compatibility-- #
-            try:
-                print("Task "+str(task_number)+" failed.\n\t"+cmd)
-            except:
-                print "Task "+str(task_number)+" failed.\n\t"+cmd
+            print("Task "+str(task_number)+" failed.\n\t"+cmd)
             # Raise the error in strict mode
             if args.strict:
                 raise
