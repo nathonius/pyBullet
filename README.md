@@ -1,13 +1,14 @@
 #pyBullet
 ##An automatic task notifier
-I wrote pyBullet while running very long builds at work. The goal of the project is to make it safe to work on other things while waiting on very long builds - without the risk of not noticing the build was complete. This is accomplished by using push notifications through PushBullet.
+I wrote pyBullet while running very long builds at work. The goal of the project is to make it safe to work on other things while waiting on very long builds - without the risk of not noticing the build was complete. This is accomplished by using push notifications through Pushbullet.
 
 ###Requirements
-Python 2.7 or Python 3.x  
-[requests module](http://docs.python-requests.org/en/latest/)
+1. Python 2.7 or Python 3.x  
+2. [requests module](http://docs.python-requests.org/en/latest/)  
+3. [Pushbullet](https://www.pushbullet.com/) account/app
 
 ###Installation
-Clone this repo somewhere easy to access. I like to make a symlink in my path so I can call it from anywhere. Then, create the file api.pub in the directory containing pyBullet.py with the contents of your PushBullet API key.
+Clone this repo somewhere easy to access. I like to make a symlink in my path so I can call it from anywhere. Then, create the file api.pub in the directory containing pyBullet.py with the contents of your Pushbullet API key.
 
 ###Usage
 General usage is like so:
