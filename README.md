@@ -8,7 +8,8 @@ I wrote pyBullet while running very long builds at work. The goal of the project
 3. [Pushbullet](https://www.pushbullet.com/) account/app
 
 ###Installation
-Clone this repo somewhere easy to access. I like to make a symlink in my path so I can call it from anywhere. Then, create the file api.pub in the directory containing pyBullet.py with the contents of your Pushbullet API key.
+1. Clone this repo somewhere easy to access. I like to make a symlink in my path so I can call it from anywhere.
+2. Enter your Pushbullet API key into the file `api.pub`, located in the same folder as `pyBullet.py`
 
 ###Usage
 General usage is like so:
