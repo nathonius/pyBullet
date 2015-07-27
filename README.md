@@ -2,6 +2,9 @@
 ##An automatic task notifier
 I wrote pyBullet while running very long builds at work. The goal of the project is to make it safe to work on other things while waiting on very long builds - without the risk of not noticing the build was complete. This is accomplished by using push notifications through Pushbullet.
 
+###WARNING
+Untested on a Unix environment. I've had problems before on this project with DOS line endings, so it may not run properly unless you call it as `python pyBullet.py`. Additionally, while there is code in place to properly combine args when using the `-s`/`--shell` flag for both Windows and Unix, the Unix code is untested. This is first on my list to fix/test.
+
 ###Requirements
 1. Python 2.7 or Python 3.x  
 2. [requests module](http://docs.python-requests.org/en/latest/)  
