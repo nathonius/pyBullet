@@ -3,7 +3,7 @@
 I wrote pyBullet while running very long builds at work. The goal of the project is to make it safe to work on other things while waiting on very long builds - without the risk of not noticing the build was complete. This is accomplished by using push notifications through PushBullet.
 
 ###Requirements
-Python 2.7 or Python 3.x
+Python 2.7 or Python 3.x  
 [requests module](http://docs.python-requests.org/en/latest/)
 
 ###Installation
