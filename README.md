@@ -19,7 +19,7 @@ General usage is like so:
 `$ pyBullet.py -m "Build Complete" -t "ProductID" /path/to/pull/script, /path/to/build/script`  
 There are three different arguments here, the first being the message to send in the notification, the second being the title of the notification, and the third being a comma separated list of commands to call. pyBullet will call all given commands, then send a notification based on the title and message given once all commands are complete.
 
-There are also quite a few other flags and features, most notably the [save and recall](https://github.com/OfficerHalf/pyBullet#save--recall) feature.
+There are also quite a few other flags and features, most notably the [save and recall](#save-and-recall) feature.
 
 | Option | Description | Example |
 | ------ | ----------- | ------- |
@@ -35,7 +35,7 @@ There are also quite a few other flags and features, most notably the [save and 
 | -w | Turn on SSL warnings. By default they are disabled. | N/A |
 | -q | Quiet mode. Do not send any notifications. | N/A |
 
-###Save & Recall
+###Save and Recall
 One of my most common tasks is pulling, then building the source for a very large project. The full command to do so looks like this (doing Windows development these days):  
 ```
 pyBullet.py -s -r -t "ProductName Build" -m "Build Complete"
