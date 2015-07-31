@@ -27,6 +27,7 @@ There are also quite a few other flags and features, most notably the [save and 
 | -t | The title to use in the notification. Default: `pyBullet` | `-t "Task Name"` |
 | --save | Save this set of arguments with this name. Can later be recalled. | `--save task_name` |
 | --recall | Recall a saved set of arguments with this name. Any args specified here will override the saved args. | `--recall task_name` |
+| --list | Displays all saved command sets. | N/A |
 | -b | If a task has a return code other than 0, do not execute the rest of the commands. Displays the failing command. | `Task 3 failed.` |
 | -e | Send a notification for each task, appending the task number to the title. | `Task Name : Task 1` |
 | -r | Add the return code to the message. | `Task Complete : Returned 0` |

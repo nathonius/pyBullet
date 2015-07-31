@@ -2,18 +2,21 @@
 from __future__ import print_function
 import requests
 import json
-import os.path as path
+import os
+import sys
+import inspect
 import argparse
 import subprocess
 import platform
+
 
 class pyBullet:
     def __init__(self, api_key=None):
         if not api_key:
             self.header = {"Content-Type": "application/json"}
             self.url = "https://api.pushbullet.com/v2/pushes"
-            config_path = path.join(path.dirname(path.abspath(__file__)), "api.pub")
-            if not path.isfile(config_path):
+            config_path = os.path.join(get_script_dir(), "api.pub")
+            if not os.path.isfile(config_path):
                 raise IOError("No api key specified and api.pub not found.")
             with open(config_path, 'r') as fp:
                 self.api_key = fp.read().strip()
@@ -59,6 +62,16 @@ def make_fakespace(data, args):
     return new_args
 
 
+def get_script_dir(follow_symlinks=True):
+    if getattr(sys, 'frozen', False):
+        path = os.path.abspath(sys.executable)
+    else:
+        path = inspect.getabsfile(get_script_dir)
+    if follow_symlinks:
+        path = os.path.realpath(path)
+    return os.path.dirname(path)
+
+
 def main():
     # Set up arg parser and parse
     parser = argparse.ArgumentParser(description="Do something, then send a notification.")
@@ -67,6 +80,7 @@ def main():
     parser.add_argument('-t', '--title', dest='title', help="Title of the message.", default="pyBullet")
     parser.add_argument('--save', dest='save', help="Store this set of commands with this name.", default=None)
     parser.add_argument('--recall', dest='recall', help="Recall a set of commands with this name.", default=None)
+    parser.add_argument('--list', dest='list', help="Show a list of all saved command sets.", default=False, action="store_true")
     parser.add_argument('-b', '--break', dest='brk', help="Stop when one task returns something other than 0.", default=False, action="store_true")
     parser.add_argument('-e', '--each', dest='each', help="Send a notification for each task.", default=False, action="store_true")
     parser.add_argument('-r', '--return', dest='code', help="Send return codes with notifications.", default=False, action="store_true")
@@ -77,11 +91,31 @@ def main():
     args = parser.parse_args()
     pb = pyBullet()
 
+    # List saved command sets
+    if args.list:
+        saved = []
+        for root, dirs, files in os.walk(get_script_dir()):
+            for name in files:
+                if name.endswith(".saved_args"):
+                    saved.append(name)
+        if len(saved) == 0:
+            print("No saved command sets found.")
+        else:
+            print("Saved command sets: ", end='')
+            first = True
+            for name in saved:
+                set_name = name[:name.find('.saved_args')]
+                if first:
+                    print(set_name, end='')
+                else:
+                    print(', '+set_name, end='')
+                first = False
+
     # Save/recall args
     saved_args = None
     if args.recall:
-        inpath = path.join(path.dirname(path.abspath(__file__)), str(args.recall)+".saved_args")
-        if not path.isfile(inpath):
+        inpath = os.path.join(get_script_dir(), str(args.recall)+".saved_args")
+        if not os.path.isfile(inpath):
             print("Could not locate saved command set \""+str(args.recall)+"\".")
             return 1
         with open(inpath, 'r') as fp:
@@ -90,7 +124,7 @@ def main():
 
     elif args.save:
         out = json.dumps(vars(args))
-        outpath = path.join(path.dirname(path.abspath(__file__)), str(args.save)+".saved_args")
+        outpath = os.path.join(get_script_dir(), str(args.save)+".saved_args")
         with open(outpath, 'w') as fp:
             fp.write(out)
 
