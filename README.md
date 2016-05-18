@@ -1,20 +1,20 @@
-#pyBullet
-##An automatic task notifier
+# pyBullet
+## An automatic task notifier
 I wrote pyBullet while running very long builds at work. The goal of the project is to make it safe to work on other things while waiting on very long builds - without the risk of not noticing the build was complete. This is accomplished by using push notifications through Pushbullet.
 
-###WARNING
+### WARNING
 Untested on a Unix environment. I've had problems before on this project with DOS line endings, so it may not run properly unless you call it as `python pyBullet.py`. Additionally, while there is code in place to properly combine args when using the `-s`/`--shell` flag for both Windows and Unix, the Unix code is untested. This is first on my list to fix/test.
 
-###Requirements
+### Requirements
 1. Python 2.7 or Python 3.x  
 2. [requests module](http://docs.python-requests.org/en/latest/)  
 3. [Pushbullet](https://www.pushbullet.com/) account/app
 
-###Installation
+### Installation
 1. Clone this repo somewhere easy to access. I like to make a symlink in my path so I can call it from anywhere.
 2. Enter your Pushbullet API key into the file `api.pub`, located in the same folder as `pyBullet.py`
 
-###Usage
+### Usage
 General usage is like so:  
 `$ pyBullet.py -m "Build Complete" -t "ProductID" /path/to/pull/script, /path/to/build/script`  
 There are three different arguments here, the first being the message to send in the notification, the second being the title of the notification, and the third being a comma separated list of commands to call. pyBullet will call all given commands, then send a notification based on the title and message given once all commands are complete.
@@ -36,7 +36,7 @@ There are also quite a few other flags and features, most notably the [save and 
 | -w | Turn on SSL warnings. By default they are disabled. | N/A |
 | -q | Quiet mode. Do not send any notifications. | N/A |
 
-###Save and Recall
+### Save and Recall
 One of my most common tasks is pulling, then building the source for a very large project. The full command to do so looks like this (doing Windows development these days):  
 ```
 pyBullet.py -s -r -t "ProductName Build" -m "Build Complete"
