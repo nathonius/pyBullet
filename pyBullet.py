@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!python3
 """
 A Pushbullet wrapper for Python. Sends a push notification when the given
 commands finish. Can be used to automate and notify long tasks, like building a
@@ -7,7 +7,6 @@ large project.
 @authors Nathan Smith
 """
 from __future__ import print_function
-import requests
 import json
 import os
 import sys
@@ -15,6 +14,7 @@ import inspect
 import argparse
 import subprocess
 import platform
+import requests
 
 DEFAULT_TITLE = "pyBullet"
 DEFAULT_MESSAGE = "Task complete."
