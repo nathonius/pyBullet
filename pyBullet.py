@@ -182,14 +182,6 @@ def main():
     cmd_args = " ".join(args.arguments)
     cmds = filter(bool, cmd_args.split(','))
 
-    # If we are running this in a shell
-    if args.shell:
-        if platform.system() is "Windows":
-            cmds = "&".join(cmds)
-        else:
-            cmds = ";".join(cmds)
-        cmds = [cmds]
-
     # Run the commands
     task_number = 1
     ret = 1
@@ -204,7 +196,10 @@ def main():
                 raise
         # Send notification if notifying for each task
         if args.each and not args.silent:
-            message = pb.build_message(args.title, args.message, ret,
+            body = args.message
+            if body == DEFAULT_MESSAGE:
+                body = cmd.strip()
+            message = pb.build_message(args.title, body, ret,
                                        task_number, code=args.code,
                                        each=args.each)
             pb.push(message[0], message[1])

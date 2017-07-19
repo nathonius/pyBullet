@@ -34,20 +34,22 @@ There are also quite a few other flags and features, most notably the [save and 
 | -q | Quiet mode. Do not send any notifications. | N/A |
 
 ### Save and Recall
-One of my most common tasks is pulling, then building the source for a very large project. The full command to do so looks like this (doing Windows development these days):  
+One of my most common tasks is pulling, then building the source for a very large project. The full command to do so looks like this:
 ```
-pyBullet.py -s -r -t "ProductName Build" -m "Build Complete"
-C:\Users\My.Name\Downloads\SetupScript\SetupScript.bat,
-C:\ProductName\debug\src\commonscripts\build\InternalBuildSystem.py pull,
-C:\ProductName\debug\src\commonscripts\build\InternalBuildSystem.py build
+pyBullet -s -r -e -b -t "Build System" "buildsystem pull", "buildsystem build"
 ```
-
-Nasty, right? No one wants to type all that every time. Admittedly, without using pyBullet, it's much easier, just a call to the setup script, pull, then build. However, if I was to add the --save flag to that command:  
+Nasty, right? No one wants to type all that every time. However, if I was to add the --save flag to that command:  
 ```
-pyBullet.py --save pull_and_build -s -r -t "ProductName Build" -m "Build Complete"
-C:\Users\My.Name\Downloads\SetupScript\SetupScript.bat,
-C:\ProductName\debug\src\commonscripts\build\InternalBuildSystem.py pull,
-C:\ProductName\debug\src\commonscripts\build\InternalBuildSystem.py build
+pyBullet --save bs -s -r -e -b -t "Build System"
 ```
-
-Now, after typing all of that only once I can run `pyBullet.py --recall pull_and_build` to run the exact same command with the exact same arguments.
+I can instead recall it, only adding the commands to be called:
+```
+pyBullet --recall bs "buildsystem pull", "buildsystem status"
+```
+Specific command sets can be saved as well, so I could save a full build command:
+```
+# save
+pyBullet --save bs_b -s -r -t "Build System" -m "Build" "buildsystem build"
+# recall
+pyBullet --recall bs_b
+```
